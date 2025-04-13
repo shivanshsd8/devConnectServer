@@ -8,13 +8,23 @@ const connectDB = require('./config/db');
 
 connectDB();
 
-app.use(cors())
-app.use(express.json())
+// ✅ Correct CORS setup
+app.use(cors({
+  origin: 'https://dev-connect-client-delta.vercel.app',
+  credentials: true
+}));
 
-app.use('/api/v1/user/',userRouter)
-app.use('/api/v1/post/',postRouter)
+// ✅ Optional: preflight support
+app.options('*', cors({
+  origin: 'https://dev-connect-client-delta.vercel.app',
+  credentials: true
+}));
 
+app.use(express.json());
 
-app.listen(3000,()=>{
-    console.log('Listening on port 3000');
-})
+app.use('/api/v1/user/', userRouter);
+app.use('/api/v1/post/', postRouter);
+
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+});
