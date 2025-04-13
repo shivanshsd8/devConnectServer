@@ -15,6 +15,7 @@ async function getUserDetails(req, res) {
             id: userDetails._id,
             name: userDetails.name,
             username: userDetails.username,
+            email:userDetails.email,
             bio: userDetails.bio,
             profileImage: userDetails.profileImage,
             followersCount: userDetails.followers.length,
